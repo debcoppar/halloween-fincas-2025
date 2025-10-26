@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Halloween Fincas 2025 – Recorridos</title>
+  <meta name="theme-color" content="#111827" />
+  <style>
+    :root{
+      --bg:#0b0f17;--fg:#e5e7eb;--muted:#9ca3af;--card:#111827;--accent:#f97316;--accent-2:#22c55e;--accent-3:#eab308;--border:#1f2937;--ok:#22c55e;--warn:#f59e0b;--danger:#ef4444;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial; background:radial-gradient(1200px 800px at 100% -10%,#111827 20%,#0b0f17 60%),var(--bg); color:var(--fg)}
+    .container{max-width:860px;margin:0 auto;padding:20px}
+    header{display:flex;gap:14px;align-items:center;justify-content:space-between;margin-bottom:16px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg,#111827,#0f172a);border:1px solid var(--border);position:relative}
+    .logo:after{content:"🎃";font-size:20px}
+    h1{font-size:20px;margin:0;font-weight:700;letter-spacing:.2px}
+    .muted{color:var(--muted);font-size:13px}
+
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.0));border:1px solid var(--border);border-radius:16px;padding:16px}
+    .section{margin-top:16px}
+
+    .group-buttons{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .btn{appearance:none;border:1px solid var(--border);background:#0b1220;color:var(--fg);padding:12px 14px;border-radius:12px;font-weight:700;font-size:15px;cursor:pointer;transition:.15s transform,.15s opacity}
+    .btn:hover{transform:translateY(-1px)}
+    .btn:active{transform:translateY(0)}
+    .btn.orange{border-color:#7c2d12;box-shadow:inset 0 0 0 999px rgba(249,115,22,.08)}
+    .btn.green{border-color:#065f46;box-shadow:inset 0 0 0 999px rgba(34,197,94,.08)}
+    .btn.yellow{border-color:#854d0e;box-shadow:inset 0 0 0 999px rgba(234,179,8,.08)}
+
+    .toolbar{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+    .tag{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);padding:6px 10px;border-radius:999px;font-size:13px}
+    .dot{width:10px;height:10px;border-radius:50%}
+    .dot.orange{background:var(--accent)}
+    .dot.green{background:var(--accent-2)}
+    .dot.yellow{background:var(--accent-3)}
+
+    .progress-wrap{margin:12px 0}
+    progress{width:100%;height:14px;-webkit-appearance:none;appearance:none}
+    progress::-webkit-progress-bar{background:#0b1220;border-radius:999px;border:1px solid var(--border)}
+    progress::-webkit-progress-value{background:linear-gradient(90deg,var(--accent),#fb923c);border-radius:999px}
+    .progress-text{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:6px}
+
+    .houses{display:grid;gap:10px;margin-top:10px}
+    .house{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--border);padding:12px;border-radius:12px;background:#0b1220}
+    .house input[type=checkbox]{width:20px;height:20px;margin-top:2px;accent-color:var(--accent)}
+    .house.done{opacity:.6}
+    .house .info{flex:1;min-width:0}
+    .title{font-weight:700}
+    .subtitle{font-size:13px;color:var(--muted)}
+    .chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+    .chip{border:1px dashed var(--border);font-size:11px;padding:3px 8px;border-radius:999px;color:var(--muted)}
+
+    .stars{display:inline-flex;gap:4px;cursor:pointer;user-select:none}
+    .star{font-size:18px;line-height:1}
+    .star.off{opacity:.35}
+
+    .list-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+    .btn.secondary{font-weight:600;background:transparent}
+    .btn.danger{border-color:#7f1d1d;box-shadow:inset 0 0 0 999px rgba(239,68,68,.08)}
+
+    .footer{margin:18px 0;color:var(--muted);font-size:12px;display:flex;justify-content:space-between;gap:8px;align-items:center}
+    .a{color:#93c5fd;text-decoration:none}
+    .a:hover{text-decoration:underline}
+
+    .hidden{display:none}
+    @media (max-width:520px){
+      .group-buttons{grid-template-columns:1fr}
+      header{flex-direction:column;align-items:flex-start}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo"></div>
+        <div>
+          <h1>Recorridos Halloween · Fincas 2025</h1>
+          <div class="muted">Elegí tu grupo, marcá visitadas y calificá la deco ⭐</div>
+        </div>
+      </div>
+      <div class="muted" id="date"></div>
+    </header>
+
+    <!-- Selección de grupo -->
+    <section id="group-picker" class="card">
+      <div class="section">
+        <div class="muted" style="margin-bottom:8px">Seleccioná tu grupo</div>
+        <div class="group-buttons">
+          <button class="btn orange" data-group="naranja">🟠 Grupo Naranja</button>
+          <button class="btn green" data-group="verde">🟢 Grupo Verde</button>
+          <button class="btn yellow" data-group="amarillo">🟡 Grupo Amarillo</button>
+        </div>
+      </div>
+      <div class="section muted" style="font-size:12px">Tip: también podés abrir directamente con <code>?g=naranja</code>, <code>?g=verde</code> o <code>?g=amarillo</code> en el link.</div>
+    </section>
+
+    <!-- Lista de casas -->
+    <section id="list" class="card hidden">
+      <div class="toolbar">
+        <span class="tag"><span id="gdot" class="dot"></span><span id="gname"></span></span>
+        <span class="tag" id="meta-count"></span>
+        <span class="tag" id="meta-entrega"></span>
+        <button class="btn secondary" id="btn-change">Cambiar grupo</button>
+        <button class="btn secondary" id="btn-share">Compartir enlace del grupo</button>
+        <button class="btn danger" id="btn-reset">Reiniciar visitadas y estrellas</button>
+      </div>
+
+      <div class="progress-wrap">
+        <progress id="progress" value="0" max="100"></progress>
+        <div class="progress-text"><span id="progress-label">0 de 0</span><span id="progress-pct">0%</span></div>
+      </div>
+
+      <div id="houses" class="houses"></div>
+
+      <div class="list-actions">
+        <button class="btn" id="btn-markall">Marcar todas</button>
+        <button class="btn" id="btn-unmarkall">Desmarcar todas</button>
+      </div>
+      <div class="footer">
+        <span>Los avances y calificaciones quedan guardados en <strong>este dispositivo</strong>.</span>
+        <a class="a" href="#" id="btn-help">Cómo editar la lista</a>
+      </div>
+    </section>
+  </div>
+
+  <dialog id="help">
+    <form method="dialog" class="card" style="max-width:720px">
+      <h3 style="margin:0 0 6px 0">Editar casas / recorridos</h3>
+      <p class="muted" style="margin-top:0">En el código hay una sección <strong>DATA</strong> con tus casas. Podés cambiar nombre, sector, dirección y notas. Las <strong>estrellas</strong> se guardan por casa en el dispositivo.</p>
+      <pre style="white-space:pre-wrap;background:#0b1220;border:1px solid var(--border);padding:10px;border-radius:10px;color:#cbd5e1;font-size:12px">const DATA = {
+  naranja: [ { id:"N1", nombre:"Familia Robles", sector:"S3", direccion:"M10 Lote 10" }, ...],
+  verde:   [ ... ],
+  amarillo:[ ... ]
+}</pre>
+      <div style="display:flex;justify-content:flex-end;margin-top:8px"><button class="btn">Cerrar</button></div>
+    </form>
+  </dialog>
+
+  <script>
+    // ======= DATA (tus recorridos reales) =======
+    const DATA = {
+      naranja: [
+        { id:"N1",  nombre:"Familia Robles",        sector:"S3", direccion:"M10 Lote 10" },
+        { id:"N2",  nombre:"Familia Boari",         sector:"S3", direccion:"M10 Lote 2"  },
+        { id:"N3",  nombre:"Familia Micieli",       sector:"S3", direccion:"M8 Lote 6"   },
+        { id:"N4",  nombre:"Familia Piñeiro",       sector:"S3", direccion:"M6 Lote 9"   },
+        { id:"N5",  nombre:"Familia Gonzalez Vía",  sector:"S3", direccion:"M6 Lote 3"   },
+        { id:"N6",  nombre:"Familia Derisio",       sector:"S3", direccion:"M7 Lote 7"   },
+        { id:"N7",  nombre:"Familia Acuña",         sector:"S4", direccion:"Lote 271"    },
+        { id:"N8",  nombre:"Familia Savignone",     sector:"S4", direccion:"Lote 225"    },
+        { id:"N9",  nombre:"Familia Mayoral",       sector:"S4", direccion:"Lote 169"    },
+        { id:"N10", nombre:"Familia Rombolá",       sector:"S4", direccion:"Lote 157"    },
+        { id:"N11", nombre:"Familia Di Bin Quaratino", sector:"S4", direccion:"Lote 189" },
+        { id:"N12", nombre:"Familia Mergiotti",     sector:"S4", direccion:"Lote 76"     },
+        { id:"N13", nombre:"Familia Orlando",       sector:"S4", direccion:"Lote 28"     },
+        { id:"N14", nombre:"Familia Dávalos",       sector:"S4", direccion:"Lote 49"     },
+        { id:"N15", nombre:"Familia Waitoller",     sector:"S4", direccion:"Lote 29"     },
+        { id:"N16", nombre:"Familia Esposito",      sector:"S5", direccion:"Lote 89"     }
+      ],
+      verde: [
+        { id:"V1",  nombre:"Familia Esposito",      sector:"S5", direccion:"Lote 89"     },
+        { id:"V2",  nombre:"Familia Waitoller",     sector:"S4", direccion:"Lote 29"     },
+        { id:"V3",  nombre:"Familia Dávalos",       sector:"S4", direccion:"Lote 49"     },
+        { id:"V4",  nombre:"Familia Orlando",       sector:"S4", direccion:"Lote 28"     },
+        { id:"V5",  nombre:"Familia Mergiotti",     sector:"S4", direccion:"Lote 76"     },
+        { id:"V6",  nombre:"Familia Di Bin Quaratino", sector:"S4", direccion:"Lote 189" },
+        { id:"V7",  nombre:"Familia Rombolá",       sector:"S4", direccion:"Lote 157"    },
+        { id:"V8",  nombre:"Familia Mayoral",       sector:"S4", direccion:"Lote 169"    },
+        { id:"V9",  nombre:"Familia Savignone",     sector:"S4", direccion:"Lote 225"    },
+        { id:"V10", nombre:"Familia Acuña",         sector:"S4", direccion:"Lote 271"    },
+        { id:"V11", nombre:"Familia Derisio",       sector:"S3", direccion:"M7 Lote 7"   },
+        { id:"V12", nombre:"Familia Piñeiro",       sector:"S3", direccion:"M6 Lote 9"   },
+        { id:"V13", nombre:"Familia Gonzalez Vía",  sector:"S3", direccion:"M6 Lote 3"   },
+        { id:"V14", nombre:"Familia Micieli",       sector:"S3", direccion:"M8 Lote 6"   },
+        { id:"V15", nombre:"Familia Robles",        sector:"S3", direccion:"M10 Lote 10" },
+        { id:"V16", nombre:"Familia Boari",         sector:"S3", direccion:"M10 Lote 2"  }
+      ],
+      amarillo: [
+        { id:"A1",  nombre:"Familia Derisio",       sector:"S3", direccion:"M7 Lote 7"   },
+        { id:"A2",  nombre:"Familia Acuña",         sector:"S4", direccion:"Lote 271"    },
+        { id:"A3",  nombre:"Familia Savignone",     sector:"S4", direccion:"Lote 225"    },
+        { id:"A4",  nombre:"Familia Mayoral",       sector:"S4", direccion:"Lote 169"    },
+        { id:"A5",  nombre:"Familia Rombolá",       sector:"S4", direccion:"Lote 157"    },
+        { id:"A6",  nombre:"Familia Di Bin Quaratino", sector:"S4", direccion:"Lote 189" },
+        { id:"A7",  nombre:"Familia Mergiotti",     sector:"S4", direccion:"Lote 76"     },
+        { id:"A8",  nombre:"Familia Orlando",       sector:"S4", direccion:"Lote 28"     },
+        { id:"A9",  nombre:"Familia Dávalos",       sector:"S4", direccion:"Lote 49"     },
+        { id:"A10", nombre:"Familia Waitoller",     sector:"S4", direccion:"Lote 29"     },
+        { id:"A11", nombre:"Familia Esposito",      sector:"S5", direccion:"Lote 89"     },
+        { id:"A12", nombre:"Familia Robles",        sector:"S3", direccion:"M10 Lote 10" },
+        { id:"A13", nombre:"Familia Boari",         sector:"S3", direccion:"M10 Lote 2"  },
+        { id:"A14", nombre:"Familia Micieli",       sector:"S3", direccion:"M8 Lote 6"   },
+        { id:"A15", nombre:"Familia Piñeiro",       sector:"S3", direccion:"M6 Lote 9"   },
+        { id:"A16", nombre:"Familia Gonzalez Vía",  sector:"S3", direccion:"M6 Lote 3"   }
+      ]
+    };
+
+    const METAS = {
+      naranja: "Entrega de pulseras: HOUSE PRINCIPAL (DEBORA)",
+      verde:   "Entrega de pulseras: HOUSE LAGUNA (MARIANA)",
+      amarillo:"Entrega de pulseras: PLAZA BOULEVARD (LEO)"
+    };
+
+    // ======= Utilidades =======
+    const qs = (s,root=document)=>root.querySelector(s);
+    const qsa = (s,root=document)=>Array.from(root.querySelectorAll(s));
+    const fmtPct = n=>`${Math.round(n)}%`;
+    const today = new Date();
+    qs('#date').textContent = today.toLocaleDateString('es-AR', {weekday:'long', day:'numeric', month:'long'});
+
+    // Persistencia por dispositivo
+    const storeKey = (group)=>`halloween_check_${group}`;
+    const rateKey  = (group)=>`halloween_rate_${group}`;
+    const loadState = (group)=>{ try{ return JSON.parse(localStorage.getItem(storeKey(group))||'[]'); }catch{ return []; } };
+    const saveState = (group, arr)=>localStorage.setItem(storeKey(group), JSON.stringify(arr));
+    const loadRates = (group)=>{ try{ return JSON.parse(localStorage.getItem(rateKey(group))||'{}'); }catch{ return {}; } };
+    const saveRates = (group, obj)=>localStorage.setItem(rateKey(group), JSON.stringify(obj));
+
+    // Estado
+    let currentGroup = null;
+
+    function setGroup(g){
+      currentGroup = g;
+      const listEl = qs('#list');
+      const pickerEl = qs('#group-picker');
+      pickerEl.classList.add('hidden');
+      listEl.classList.remove('hidden');
+
+      // Tag y color
+      const names = { naranja:'Grupo Naranja', verde:'Grupo Verde', amarillo:'Grupo Amarillo' };
+      qs('#gname').textContent = names[g] || g;
+      const dot = qs('#gdot');
+      dot.className = 'dot';
+      if(g==='naranja') dot.classList.add('orange');
+      if(g==='verde') dot.classList.add('green');
+      if(g==='amarillo') dot.classList.add('yellow');
+
+      // Meta entrega
+      const entrega = METAS[g] || '';
+      const entregaEl = qs('#meta-entrega');
+      if(entrega){ entregaEl.textContent = entrega; } else { entregaEl.textContent=''; }
+
+      // Render
+      renderList();
+
+      // Actualizar URL (no recarga)
+      const url = new URL(window.location);
+      url.searchParams.set('g', g);
+      history.replaceState(null,'',url);
+    }
+
+    function renderStars(container, id){
+      const rates = loadRates(currentGroup);
+      const value = Number(rates[id]||0);
+      container.innerHTML = '';
+      for(let i=1;i<=5;i++){
+        const s = document.createElement('span');
+        s.className = 'star' + (i<=value? '':' off');
+        s.textContent = '★';
+        s.title = `${i}/5`;
+        s.addEventListener('click', ()=>{
+          rates[id] = i;
+          saveRates(currentGroup, rates);
+          renderStars(container, id);
+        });
+        container.appendChild(s);
+      }
+    }
+
+    function renderList(){
+      const houses = DATA[currentGroup] || [];
+      const visited = new Set(loadState(currentGroup));
+      qs('#meta-count').textContent = `${houses.length} casas`;
+
+      const container = qs('#houses');
+      container.innerHTML = '';
+
+      houses.forEach(casa=>{
+        const id = casa.id;
+        const done = visited.has(id);
+        const div = document.createElement('div');
+        div.className = 'house' + (done?' done':'');
+
+        const cb = document.createElement('input');
+        cb.type = 'checkbox';
+        cb.checked = done;
+        cb.addEventListener('change',() => toggleVisit(id));
+
+        const info = document.createElement('div');
+        info.className = 'info';
+        const title = document.createElement('div');
+        title.className = 'title';
+        title.textContent = casa.nombre;
+
+        const subtitle = document.createElement('div');
+        subtitle.className = 'subtitle';
+        subtitle.textContent = `${casa.sector || ''} · ${casa.direccion || ''}`.replace(/\s·\s$/,'');
+
+        const chips = document.createElement('div');
+        chips.className = 'chips';
+        if(casa.notas){
+          const chip = document.createElement('span');
+          chip.className = 'chip';
+          chip.textContent = casa.notas;
+          chips.appendChild(chip);
+        }
+
+        // Estrellas de calificación
+        const starsWrap = document.createElement('div');
+        starsWrap.className = 'stars';
+        renderStars(starsWrap, id);
+
+        info.appendChild(title);
+        info.appendChild(subtitle);
+        info.appendChild(starsWrap);
+        info.appendChild(chips);
+
+        div.appendChild(cb);
+        div.appendChild(info);
+        container.appendChild(div);
+      });
+
+      updateProgress();
+    }
+
+    function toggleVisit(id){
+      const visited = new Set(loadState(currentGroup));
+      if(visited.has(id)) visited.delete(id); else visited.add(id);
+      saveState(currentGroup, Array.from(visited));
+      renderList();
+    }
+
+    function updateProgress(){
+      const houses = DATA[currentGroup] || [];
+      const visited = new Set(loadState(currentGroup));
+      const done = houses.filter(h=>visited.has(h.id)).length;
+      const total = houses.length || 1;
+      const pct = (done/total)*100;
+      qs('#progress').value = pct;
+      qs('#progress-label').textContent = `${done} de ${total}`;
+      qs('#progress-pct').textContent = fmtPct(pct);
+    }
+
+    // Botones
+    qsa('.group-buttons .btn').forEach(b=>b.addEventListener('click',()=>setGroup(b.dataset.group)));
+    document.addEventListener('click', (e)=>{
+      if(e.target && e.target.id==='btn-change'){
+        qs('#list').classList.add('hidden');
+        qs('#group-picker').classList.remove('hidden');
+      }
+    });
+    document.addEventListener('click', (e)=>{
+      if(e.target && e.target.id==='btn-reset'){
+        if(!currentGroup) return;
+        if(confirm('¿Reiniciar visitadas y estrellas del grupo actual?')){
+          saveState(currentGroup, []);
+          localStorage.removeItem(`halloween_rate_${currentGroup}`);
+          renderList();
+        }
+      }
+    });
+    document.addEventListener('click', (e)=>{
+      if(e.target && e.target.id==='btn-markall'){
+        const houses = DATA[currentGroup] || [];
+        saveState(currentGroup, houses.map(h=>h.id));
+        renderList();
+      }
+    });
+    document.addEventListener('click', (e)=>{
+      if(e.target && e.target.id==='btn-unmarkall'){
+        saveState(currentGroup, []);
+        renderList();
+      }
+    });
+    document.addEventListener('click', async (e)=>{
+      if(e.target && e.target.id==='btn-share'){
+        const url = new URL(window.location);
+        url.searchParams.set('g', currentGroup);
+        const shareUrl = url.toString();
+        try{
+          await navigator.clipboard.writeText(shareUrl);
+          alert('Enlace copiado: ' + shareUrl);
+        }catch{
+          prompt('Copiá el enlace:', shareUrl);
+        }
+      }
+    });
+    document.addEventListener('click', (e)=>{
+      if(e.target && e.target.id==='btn-help'){
+        e.preventDefault();
+        document.querySelector('#help').showModal();
+      }
+    });
+
+    // Auto-selección por URL (?g=naranja|verde|amarillo)
+    const params = new URLSearchParams(location.search);
+    const g = params.get('g');
+    if(['naranja','verde','amarillo'].includes(g)) setGroup(g);
+  </script>
+</body>
+</html>
